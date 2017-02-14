@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   root 'url_generator#index'
 
+  resources :url_generator
+  get 's/:short_url', as: :short_link, to: 'short_url#show', constraints: { short_url: /[a-zA-Z]{7}/ }
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

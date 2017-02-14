@@ -1,1 +1,12 @@
-<%= render partial: 'item', collection: @destination_links %>
+<h2>Destination Links <%= link_to 'Add New', new_url_generator_path %></h2>
+<table>
+  <thead>
+    <tr>
+      <th>Link</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: 'destination_link', collection: @destination_links %>
+  </tbody>
+</table>

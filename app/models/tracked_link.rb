@@ -9,6 +9,10 @@ class TrackedLink < ActiveRecord::Base
 
   before_validation :generate_tracked_url
 
+  scope :with_destination_link, -> {
+    includes(:destination_link)
+  }
+
   def visit_event(options = {})
     tracked_link_audits << TrackedLinkAudit.new(options)
   end

@@ -1,0 +1,8 @@
+<h2>Destination URL</h2>
+<p>Destination URL: <%= @destination_link.url %></p>
+
+<%- @destination_link.tracked_links.each do |tl| %>
+    <p>Tracked Link: <%= link_to short_link_url(tl.tracked_url), short_link_url(tl.tracked_url) %> (Created <%= tl.created_at %>)</p>
+<% end %>
+
+<%= link_to 'Back', url_generator_index_path %>
