@@ -30,6 +30,8 @@ gem 'twitter-bootstrap-rails'
 gem 'puma'
 gem 'versionist'
 gem 'simple_token_authentication', '~> 1.0'
+gem 'active_model_serializers', '~> 0.10.4'
+gem 'swagger-blocks'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -48,6 +50,7 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'swagger', path: 'engines/swagger'
 end
 
 group :production do

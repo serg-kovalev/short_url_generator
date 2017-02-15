@@ -1,57 +1,64 @@
 module Api
   module V1
-    class UrlGeneratorController < ApplicationController
-      before_action :load_destination_link, only: [:show, :edit, :update, :destroy]
+    class UrlGeneratorController < V1::BaseController
+      before_action :load_destination_link, only: [:show, :update, :destroy]
+
+      # swagger_controller :url_generator, 'UrlGenerator'
+      #
+      # %i(dashboard index show create update destroy tracked_link_details).each do |api_action|
+      #     swagger_api api_action do
+      #       param :header, 'X-User-Email', :string, :required, 'User email'
+      #       param :header, 'X-User-Token', :string, :required, 'User Auth Token'
+      #       param :header, 'Content-Type', :string, :required
+      #     end
+      # end
+      #
+      # swagger_api :index do
+      #   summary 'Returns all Destination Links'
+      #
+      #
+      # end
 
       def dashboard
         @tracked_links = TrackedLink.includes(destination_link: :user).where(users: {id: current_user.id }).
             where('visits_count > ?', 0).order(visits_count: :desc)
+        render json: @tracked_links
       end
 
       def index
         @destination_links = DestinationLink.with_tracked_links.by_user(current_user)
-      end
-
-      def new
-        @destination_link = DestinationLink.new
+        render json: @destination_links
       end
 
       def show
+        render json: @destination_link
       end
 
       def create
         @destination_link = DestinationLink.create(destination_link_params.merge(user: current_user))
         if @destination_link.persisted?
           @destination_link.tracked_links.create if @destination_link.new_tracked_link
-          flash[:notice] = 'Destination Link created.'
-          redirect_to action: :index
+          render json: @destination_link
         else
-          flash[:error] = 'Destination Link was not created.'
-          render :new
+          render json: { errors: @destination_link.errors }, status: 422
         end
-      end
-
-      def edit
       end
 
       def update
         if @destination_link.update(destination_link_params)
           @destination_link.tracked_links.create if @destination_link.new_tracked_link
-          flash[:notice] = 'Destination Link updated.'
-          redirect_to action: :index
+          render json: @destination_link
         else
-          flash[:error] = 'Destination Link was not updated.'
-          render :new
+          render json: { errors: @destination_link.errors }, status: 422
         end
       end
 
       def destroy
         if @destination_link.destroy
-          flash[:notice] = 'Destination Link was deleted.'
+          render status: 200
         else
-          flash[:error] = 'Destination Link was not deleted.'
+          render json: { errors: @destination_link.errors }, status: 422
         end
-        redirect_to action: :index
       end
 
       def tracked_link_details
@@ -61,6 +68,7 @@ module Api
         IpApiCache.load_info_for_ips(ip_addresses - IpApiCache.where(ip_address: ip_addresses).pluck(:ip_address))
         @results_by_country = TrackedLinkAudit.joins(:ip_api_cache).where(tracked_link_id: @tracked_link.id).
             group(:country).count.sort_by { |e| -e.last }
+        render json: @results_by_country
       end
 
       private

@@ -17,4 +17,8 @@ Rails.application.routes.draw do
   get :dashboard, to: 'url_generator#dashboard'
   get 'link_details/:tracked_url', as: :tracked_link_details, to: 'url_generator#tracked_link_details',
       constraints: { tracked_url: /[a-zA-Z]{7}/ }
+
+  if Rails.env.development?
+    mount Swagger::Engine => 'swagger'
+  end
 end
