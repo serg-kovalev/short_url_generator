@@ -1,0 +1,18 @@
+<h2>Number of visits by Country:</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Visits #</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%- @results_by_country.each do |country, visits| %>
+     <tr>
+       <td><%= country %></td>
+       <td><%= visits %></td>
+     </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= link_to 'Back', url_generator_path(@tracked_link.destination_link) %>

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root 'url_generator#index'
 
   resources :url_generator
+  get 'link_details/:tracked_url', as: :tracked_link_details, to: 'url_generator#tracked_link_details',
+      constraints: { tracked_url: /[a-zA-Z]{7}/ }
   get 's/:short_url', as: :short_link, to: 'short_url#show', constraints: { short_url: /[a-zA-Z]{7}/ }
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

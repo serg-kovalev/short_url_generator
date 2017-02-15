@@ -46,6 +46,14 @@ class UrlGeneratorController < ApplicationController
     redirect_to action: :index
   end
 
+  def tracked_link_details
+    @tracked_link = TrackedLink.includes(destination_link: :user).
+        where(users: {id: current_user.id }).find_by_tracked_url!(params[:tracked_url])
+    ip_addresses = TrackedLinkAudit.where(tracked_link_id: @tracked_link.id).pluck('DISTINCT ip_address')
+    IpApiCache.load_info_for_ips(IpApiCache.where.not(ip_address: ip_addresses).pluck(:ip_address))
+    @results_by_country = TrackedLinkAudit.joins(:ip_api_cache).where(tracked_link_id: @tracked_link.id).group(:country).count
+  end
+
   private
 
   def load_destination_link
