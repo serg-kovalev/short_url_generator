@@ -1,12 +1,14 @@
 <h2>Destination Links <%= link_to 'Add New', new_url_generator_path %></h2>
-<table>
-  <thead>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
     <tr>
       <th>Link</th>
       <th>Action</th>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     <%= render partial: 'destination_link', collection: @destination_links, as: :destination_link %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>

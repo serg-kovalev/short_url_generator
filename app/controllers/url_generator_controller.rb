@@ -1,5 +1,11 @@
 class UrlGeneratorController < ApplicationController
   before_action :load_destination_link, only: [:show, :edit, :update, :destroy]
+
+  def dashboard
+    @tracked_links = TrackedLink.includes(destination_link: :user).where(users: {id: current_user.id }).
+                                where('visits_count > ?', 0).order(visits_count: :desc)
+  end
+
   def index
     @destination_links = DestinationLink.with_tracked_links.by_user(current_user)
   end
@@ -50,8 +56,9 @@ class UrlGeneratorController < ApplicationController
     @tracked_link = TrackedLink.includes(destination_link: :user).
         where(users: {id: current_user.id }).find_by_tracked_url!(params[:tracked_url])
     ip_addresses = TrackedLinkAudit.where(tracked_link_id: @tracked_link.id).pluck('DISTINCT ip_address')
-    IpApiCache.load_info_for_ips(IpApiCache.where.not(ip_address: ip_addresses).pluck(:ip_address))
-    @results_by_country = TrackedLinkAudit.joins(:ip_api_cache).where(tracked_link_id: @tracked_link.id).group(:country).count
+    IpApiCache.load_info_for_ips(ip_addresses - IpApiCache.where(ip_address: ip_addresses).pluck(:ip_address))
+    @results_by_country = TrackedLinkAudit.joins(:ip_api_cache).where(tracked_link_id: @tracked_link.id).
+        group(:country).count.sort_by { |e| -e.last }
   end
 
   private

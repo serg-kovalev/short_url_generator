@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
-  root 'url_generator#index'
+  root 'url_generator#dashboard'
 
   resources :url_generator
+  get :dashboard, to: 'url_generator#dashboard'
   get 'link_details/:tracked_url', as: :tracked_link_details, to: 'url_generator#tracked_link_details',
       constraints: { tracked_url: /[a-zA-Z]{7}/ }
   get 's/:short_url', as: :short_link, to: 'short_url#show', constraints: { short_url: /[a-zA-Z]{7}/ }

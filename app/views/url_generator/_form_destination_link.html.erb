@@ -3,7 +3,7 @@
     <p>Destination URL: <%= f.url_field :url %></p>
     <p>Generate new tracked link: <%= f.check_box :new_tracked_link %></p>
 
-    <%= render partial: 'shared/tracked_link', collection: f.object.tracked_links, as: :tracked_link, layout: 'layouts/tracked_link' %>
+    <%= render partial: '/shared/tracked_links', locals: { tracked_links: f.object.tracked_links, with_destination: false } %>
 
     <%= f.submit 'Save' %>
 <% end %>

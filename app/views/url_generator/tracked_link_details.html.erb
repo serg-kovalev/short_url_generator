@@ -1,5 +1,6 @@
 <h2>Number of visits by Country:</h2>
-<table>
+<div class="table-responsive">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Country</th>
@@ -15,4 +16,5 @@
   <% end %>
   </tbody>
 </table>
+</div>
 <%= link_to 'Back', url_generator_path(@tracked_link.destination_link) %>

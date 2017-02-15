@@ -1,0 +1,22 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <%- if with_destination %>
+      <th>Destination</th>
+      <% end %>
+      <th>Short Link</th>
+      <th>Visits</th>
+      <th>Created</th>
+      <th>Details</th>
+      <%- unless defined? with_destination %>
+      <th>Delete</th>
+      <% end %>
+    </tr>
+    </thead>
+    <tbody>
+    <%= render partial: '/shared/tracked_link', collection: tracked_links, as: :tracked_link,
+               locals: { with_destination: with_destination } %>
+    </tbody>
+  </table>
+</div>
