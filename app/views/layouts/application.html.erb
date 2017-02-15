@@ -49,8 +49,8 @@
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
             <%- if user_signed_in? %>
-                <li><%= link_to 'Dashboard', dashboard_path %></li>
-                <li><%= link_to 'Manage Tracked Links', url_generator_index_path %></li>
+                <li><%= link_to 'Dashboard', v1_dashboard_path %></li>
+                <li><%= link_to 'Manage Tracked Links', v1_url_generator_index_path %></li>
                 <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
             <% else %>
                 <li><%= link_to 'Sign In', new_user_session_path %></li>

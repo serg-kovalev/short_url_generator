@@ -28,6 +28,7 @@ gem 'rest-client'
 gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
 gem 'puma'
+gem 'versionist'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

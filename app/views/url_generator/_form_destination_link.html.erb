@@ -1,9 +1,0 @@
-<%= form_for destination_link,
-             url: (destination_link.new_record? ? url_generator_index_path : url_generator_path(destination_link)) do |f| %>
-    <p>Destination URL: <%= f.url_field :url %></p>
-    <p>Generate new tracked link: <%= f.check_box :new_tracked_link %></p>
-
-    <%= render partial: '/shared/tracked_links', locals: { tracked_links: f.object.tracked_links, with_destination: false } %>
-
-    <%= f.submit 'Save' %>
-<% end %>

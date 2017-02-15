@@ -1,4 +1,4 @@
-class UrlGeneratorController < ApplicationController
+class V1::UrlGeneratorController < V1::BaseController
   before_action :load_destination_link, only: [:show, :edit, :update, :destroy]
 
   def dashboard
