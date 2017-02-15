@@ -1,0 +1,6 @@
+<h2>Destination URL</h2>
+<p>Destination URL: <%= @destination_link.url %></p>
+
+<%= render partial: 'shared/tracked_links', locals: { tracked_links: @destination_link.tracked_links, with_destination: false } %>
+
+<%= link_to 'Back', url_generator_index_path %>

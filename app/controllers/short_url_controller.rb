@@ -1,4 +1,4 @@
-class V1::ShortUrlController < V1::BaseController
+class ShortUrlController < ApplicationController
   skip_before_action :authenticate_user!
 
   def show
@@ -8,6 +8,6 @@ class V1::ShortUrlController < V1::BaseController
       redirect_to tracked_link.destination_link.url
       return
     end
-    redirect_to v1_dashboard_url
+    redirect_to dashboard_url
   end
 end
