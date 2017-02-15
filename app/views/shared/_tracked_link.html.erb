@@ -1,0 +1,6 @@
+<tr>
+  <td><%= link_to short_link_url(tracked_link.tracked_url), short_link_url(tracked_link.tracked_url) %></td>
+  <td><%= tracked_link.visits_count %></td>
+  <td><%= I18n.l(tracked_link.created_at) %></td>
+  <td></td>
+</tr>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170214131555) do
+ActiveRecord::Schema.define(version: 20170215090954) do
 
   create_table "destination_links", force: :cascade do |t|
     t.string   "url"
@@ -21,6 +21,25 @@ ActiveRecord::Schema.define(version: 20170214131555) do
   end
 
   add_index "destination_links", ["user_id"], name: "index_destination_links_on_user_id"
+
+  create_table "ip_api_caches", force: :cascade do |t|
+    t.string   "ip_address"
+    t.string   "city"
+    t.string   "country"
+    t.string   "country_code"
+    t.string   "isp"
+    t.string   "lat"
+    t.string   "lon"
+    t.string   "org"
+    t.string   "region"
+    t.string   "region_name"
+    t.string   "timezone"
+    t.string   "zip"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "ip_api_caches", ["ip_address"], name: "index_ip_api_caches_on_ip_address", unique: true
 
   create_table "tracked_link_audits", force: :cascade do |t|
     t.integer  "tracked_link_id"
@@ -34,8 +53,9 @@ ActiveRecord::Schema.define(version: 20170214131555) do
   create_table "tracked_links", force: :cascade do |t|
     t.string   "tracked_url"
     t.integer  "destination_link_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "visits_count",        default: 0, null: false
   end
 
   add_index "tracked_links", ["destination_link_id"], name: "index_tracked_links_on_destination_link_id"

@@ -3,9 +3,7 @@
     <p>Destination URL: <%= f.url_field :url %></p>
     <p>Generate new tracked link: <%= f.check_box :new_tracked_link %></p>
 
-    <%- f.object.tracked_links.each do |tl| %>
-        <p>Tracked Link: <%= link_to short_link_url(tl.tracked_url), short_link_url(tl.tracked_url) %> (Created <%= tl.created_at %>)</p>
-    <% end %>
+    <%= render partial: 'shared/tracked_link', collection: f.object.tracked_links, as: :tracked_link, layout: 'layouts/tracked_link' %>
 
     <%= f.submit 'Save' %>
 <% end %>
