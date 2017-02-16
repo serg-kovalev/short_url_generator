@@ -1,0 +1,244 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Short URL Gen",
+		"_postman_id": "09650909-2dc9-4767-7ffb-e7327eab0d51",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Dashboard (only active Tracked Links)",
+			"request": {
+				"url": "localhost:3000/api/v1/dashboard",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "X-User-Email",
+						"value": "{{email}}",
+						"description": ""
+					},
+					{
+						"key": "X-User-Token",
+						"value": "{{token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Tracked Links List (all)",
+			"request": {
+				"url": "localhost:3000/api/v1/tracked_links",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "X-User-Email",
+						"value": "{{email}}",
+						"description": ""
+					},
+					{
+						"key": "X-User-Token",
+						"value": "{{token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Destination Links List",
+			"request": {
+				"url": "localhost:3000/api/v1/url_generator",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "X-User-Email",
+						"value": "{{email}}",
+						"description": ""
+					},
+					{
+						"key": "X-User-Token",
+						"value": "{{token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Destination Link",
+			"request": {
+				"url": "localhost:3000/api/v1/url_generator/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "X-User-Email",
+						"value": "{{email}}",
+						"description": ""
+					},
+					{
+						"key": "X-User-Token",
+						"value": "{{token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Destination Link",
+			"request": {
+				"url": "localhost:3000/api/v1/url_generator",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "X-User-Email",
+						"value": "{{email}}",
+						"description": ""
+					},
+					{
+						"key": "X-User-Token",
+						"value": "{{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"destination_link\": {\n\t\t\"url\": \"http://goo.gl\",\n\t\t\"user_id\": 1,\n\t\t\"new_tracked_link\": true\n\t}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Destination Link",
+			"request": {
+				"url": "localhost:3000/api/v1/url_generator/4",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "X-User-Email",
+						"value": "{{email}}",
+						"description": ""
+					},
+					{
+						"key": "X-User-Token",
+						"value": "{{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"destination_link\": {\n\t\t\"url\": \"http://goo.gl\",\n\t\t\"user_id\": 1,\n\t\t\"new_tracked_link\": true\n\t}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Destination Link",
+			"request": {
+				"url": "localhost:3000/api/v1/url_generator/2",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "X-User-Email",
+						"value": "{{email}}",
+						"description": ""
+					},
+					{
+						"key": "X-User-Token",
+						"value": "{{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
