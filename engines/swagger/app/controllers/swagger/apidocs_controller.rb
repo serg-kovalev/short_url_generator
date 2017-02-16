@@ -27,8 +27,8 @@ module Swagger
         # end
       end
       key :schemes, ['http']
-      key :host, 'http://localhost:3000'
-      # key :basePath, '/v1'
+      # key :host, 'http://localhost:3000'
+      key :basePath, '/api'
       key :consumes, ['application/json']
       key :produces, ['application/json']
     end
@@ -38,6 +38,7 @@ module Swagger
       # SwaggerSchema,
       V1::UrlGeneratorController,
       Swagger::TrackedLink,
+      Swagger::DestinationLink,
       self
     ].freeze
 
