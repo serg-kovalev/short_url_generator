@@ -3,22 +3,6 @@ module Api
     class UrlGeneratorController < V1::BaseController
       before_action :load_destination_link, only: [:show, :update, :destroy]
 
-      # swagger_controller :url_generator, 'UrlGenerator'
-      #
-      # %i(dashboard index show create update destroy tracked_link_details).each do |api_action|
-      #     swagger_api api_action do
-      #       param :header, 'X-User-Email', :string, :required, 'User email'
-      #       param :header, 'X-User-Token', :string, :required, 'User Auth Token'
-      #       param :header, 'Content-Type', :string, :required
-      #     end
-      # end
-      #
-      # swagger_api :index do
-      #   summary 'Returns all Destination Links'
-      #
-      #
-      # end
-
       def dashboard
         @tracked_links = TrackedLink.includes(destination_link: :user).where(users: {id: current_user.id }).
             where('visits_count > ?', 0).order(visits_count: :desc)
@@ -55,10 +39,15 @@ module Api
 
       def destroy
         if @destination_link.destroy
-          render status: 200
+          render json: {}
         else
           render json: { errors: @destination_link.errors }, status: 422
         end
+      end
+
+      def tracked_links
+        @tracked_links = TrackedLink.includes(destination_link: :user).where(users: {id: current_user.id })
+        render json: @tracked_links
       end
 
       def tracked_link_details

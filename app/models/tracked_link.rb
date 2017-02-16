@@ -2,7 +2,7 @@ require 'securerandom'
 
 class TrackedLink < ActiveRecord::Base
   belongs_to :destination_link
-  has_many :tracked_link_audits
+  has_many :tracked_link_audits, dependent: :destroy
 
   validates_presence_of :destination_link_id, :tracked_url
   validates_uniqueness_of :tracked_url

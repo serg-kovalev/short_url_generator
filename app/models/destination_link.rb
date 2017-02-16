@@ -1,6 +1,6 @@
 class DestinationLink < ActiveRecord::Base
   belongs_to :user
-  has_many :tracked_links
+  has_many :tracked_links, dependent: :destroy
 
   attr_accessor :new_tracked_link
 
