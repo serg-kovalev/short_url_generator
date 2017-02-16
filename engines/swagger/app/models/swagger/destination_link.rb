@@ -13,6 +13,7 @@ module Swagger
       end
       property :user_id do
         key :type, :integer
+        key :format, :int64
       end
     end
 

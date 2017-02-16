@@ -10,9 +10,9 @@ module Swagger::V1
         ]
         response 200 do
           key :description, 'Dashboard response'
-          # schema do
-          #   key :'$ref', :TrackedLink
-          # end
+          schema do
+            key :'$ref', :TrackedLink
+          end
         end
         response :default do
           key :description, 'unexpected error'
@@ -28,9 +28,9 @@ module Swagger::V1
         ]
         response 200 do
           key :description, 'Tracked Links List response'
-          # schema do
-          #   key :'$ref', :TrackedLink
-          # end
+          schema do
+            key :'$ref', :TrackedLink
+          end
         end
         response :default do
           key :description, 'unexpected error'
@@ -49,6 +49,30 @@ module Swagger::V1
           # schema do
           #   key :'$ref', :DestinationLink
           # end
+        end
+        response :default do
+          key :description, 'unexpected error'
+        end
+      end
+
+      operation :post do
+        key :description, 'Creates a single Destination Link if the user has an access'
+        key :tags, [
+            'Create Destination Link'
+        ]
+        parameter do
+          key :name, :destination_link
+          key :in, 'body'
+          key :required, true
+          schema do
+            key :'$ref', :DestinationLinkInput
+          end
+        end
+        response 200 do
+          key :description, 'Create Destination Link response'
+          schema do
+            key :'$ref', :DestinationLink
+          end
         end
         response :default do
           key :description, 'unexpected error'
@@ -80,9 +104,7 @@ module Swagger::V1
           key :description, 'unexpected error'
         end
       end
-    end
 
-    swagger_path '/v1/url_generator/{id}' do
       operation :put do
         key :description, 'Updates a single Destination Link if the user has an access'
         key :tags, [
@@ -108,6 +130,30 @@ module Swagger::V1
           key :description, 'Update Destination Link response'
           schema do
             key :'$ref', :DestinationLink
+          end
+        end
+        response :default do
+          key :description, 'unexpected error'
+        end
+      end
+
+      operation :delete do
+        key :description, 'Deletes a single Destination Link if the user has an access'
+        key :tags, [
+            'Delete Destination Link'
+        ]
+        parameter do
+          key :name, :id
+          key :in, :path
+          key :description, 'ID of Destination Link to fetch'
+          key :required, true
+          key :type, :integer
+          key :format, :int64
+        end
+        response 200 do
+          key :description, 'Delete Destination Link response'
+          schema do
+            key :type, :object
           end
         end
         response :default do
